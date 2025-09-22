@@ -7,7 +7,7 @@ const create = async (data: FormData) => {
 
 const CreateBlog = () => {
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="container flex justify-center items-center">
       <CreateBlogForm />
     </div>
   );
