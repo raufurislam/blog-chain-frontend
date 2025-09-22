@@ -6,7 +6,7 @@ export default async function HomePage() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
     // cache: "no-store", // because its home page. i don't want to update it on time and don't want to show loading state so I revalidate it
     next: {
-      revalidate: 30,
+      tags: ["BLOGS"],
     },
   });
   const { data: blogs } = await res.json();
