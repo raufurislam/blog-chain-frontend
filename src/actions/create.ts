@@ -12,8 +12,9 @@ export const create = async (data: FormData) => {
       .toString()
       .split(",")
       .map((tag) => tag.trim()),
+    isFeatured: Boolean(blogInfo.isFeatured),
   };
-  //   console.log(modifiedData);
+  console.log(modifiedData);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
     method: "POST",
@@ -24,7 +25,7 @@ export const create = async (data: FormData) => {
   });
 
   const result = await res.json();
-  if (result) {
+  if (result?.id) {
     redirect("/blogs");
   }
 
