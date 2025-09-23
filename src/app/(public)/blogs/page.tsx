@@ -1,4 +1,5 @@
 import BlogCard from "@/components/modules/Blogs/BlogCard";
+import { getAllBlogs } from "@/services/PostServices";
 import { IPost } from "@/types";
 import { Metadata } from "next";
 
@@ -9,10 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function AllBlogsPage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
-    cache: "no-store",
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
+  //   cache: "no-store",
+  // });
+  // const { data: blogs } = await res.json();
+
+  const { data: blogs } = await getAllBlogs({
+    cache: "no-store", // always fresh
   });
-  const { data: blogs } = await res.json();
 
   return (
     <div className="py-30 px-4 max-w-7xl mx-auto">
