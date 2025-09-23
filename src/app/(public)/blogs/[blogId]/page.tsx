@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BlogDetailsCard from "@/components/modules/Blogs/BlogDetailsCard";
+import { getBlogById } from "@/services/PostServices";
 
 export async function generateMetadata({
   params,
@@ -7,9 +8,7 @@ export async function generateMetadata({
   params: Promise<{ blogId: string }>;
 }) {
   const { blogId } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/${blogId}`);
-  const blog = await res.json();
-
+  const blog = await getBlogById(blogId);
   return {
     title: `${blog?.title || "Blog"} | Next Blog`,
     description: blog?.content || "Read more about this blog",
@@ -31,8 +30,8 @@ export default async function BlogDetailsPage({
   params: Promise<{ blogId: string }>;
 }) {
   const { blogId } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/${blogId}`);
-  const blog = await res.json();
+  const blog = await getBlogById(blogId);
+
   console.log({ blog });
 
   return (
