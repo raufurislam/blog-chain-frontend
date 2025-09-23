@@ -32,7 +32,7 @@ export default async function BlogDetailsPage({
   const { blogId } = await params;
   const blog = await getBlogById(blogId);
 
-  console.log({ blog });
+  // console.log({ blog });
 
   return (
     <div className="py-30 px-4 max-w-7xl mx-auto">

@@ -1,15 +1,20 @@
 import BlogCard from "@/components/modules/Blogs/BlogCard";
 import Hero from "@/components/modules/Home/Hero";
+import { getAllBlogs } from "@/services/PostServices";
 import { IPost } from "@/types";
 
 export default async function HomePage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
-    // cache: "no-store", // because its home page. i don't want to update it on time and don't want to show loading state so I revalidate it
-    next: {
-      tags: ["BLOGS"],
-    },
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post`, {
+  //   // cache: "no-store", // because its home page. i don't want to update it on time and don't want to show loading state so I revalidate it
+  //   next: {
+  //     tags: ["BLOGS"],
+  //   },
+  // });
+  // const { data: blogs } = await res.json();
+
+  const { data: blogs } = await getAllBlogs({
+    next: { tags: ["BLOGS"] }, // ISR with tags
   });
-  const { data: blogs } = await res.json();
 
   return (
     <div>
