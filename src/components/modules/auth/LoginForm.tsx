@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -33,6 +34,8 @@ export default function LoginForm() {
 
   const handleSocialLogin = (provider: "google" | "github") => {
     console.log(`Login with provider ${provider}`);
+
+    // signIn();
   };
 
   return (
@@ -115,7 +118,11 @@ export default function LoginForm() {
           <Button
             variant="outline"
             className="flex items-center justify-center gap-2"
-            onClick={() => handleSocialLogin("google")}
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: "/dashboard",
+              })
+            }
           >
             {/* Google */}
             <Image
