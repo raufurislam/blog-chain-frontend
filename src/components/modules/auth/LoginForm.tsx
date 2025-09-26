@@ -32,12 +32,14 @@ export default function LoginForm() {
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      const res = await login(values);
-      if (res?.id) {
-        toast.success("User Logged in Successfully");
-      } else {
-        toast.error("User Login Failed");
-      }
+      // const res = await login(values);
+      // if (res?.id) {
+      //   toast.success("User Logged in Successfully");
+      // } else {
+      //   toast.error("User Login Failed");
+      // }
+
+      signIn("credentials", { ...values, callbackUrl: "/dashboard" });
     } catch (err) {
       console.error(err);
     }
