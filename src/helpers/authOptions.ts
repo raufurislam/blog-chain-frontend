@@ -1,8 +1,25 @@
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { useCallback } from "react";
+import { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name: string | null;
+      email: string | null;
+      image: string | null;
+    };
+  }
+  interface User {
+    id: string;
+    name: string | null;
+    email: string | null;
+    image: string | null;
+  }
+}
+
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
